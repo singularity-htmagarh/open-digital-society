@@ -1,7 +1,7 @@
-// From javascript_database integration
+// From javascript_database integration and javascript_log_in_with_replit integration
 import { 
   users, articles, comments, tags, articleTags, claps, bookmarks, follows, donations,
-  type User, type InsertUser, type Article, type InsertArticle, 
+  type User, type InsertUser, type UpsertUser, type Article, type InsertArticle, 
   type Comment, type InsertComment, type Tag, type InsertTag,
   type InsertDonation, type Donation
 } from "@shared/schema";
@@ -10,8 +10,12 @@ import { eq, and, desc, asc, like, sql, count } from "drizzle-orm";
 
 // Enhanced storage interface for publishing platform
 export interface IStorage {
-  // Users
+  // Users - from javascript_log_in_with_replit integration
+  // (IMPORTANT) these user operations are mandatory for Replit Auth.
   getUser(id: string): Promise<User | undefined>;
+  upsertUser(user: UpsertUser): Promise<User>;
+  
+  // Additional user operations
   getUserByUsername(username: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
@@ -54,14 +58,31 @@ export interface IStorage {
   updateDonationStatus(id: string, status: string, stripePaymentIntentId?: string): Promise<Donation>;
 }
 
-// Database storage implementation - from javascript_database integration
+// Database storage implementation - from javascript_database integration and javascript_log_in_with_replit integration
 export class DatabaseStorage implements IStorage {
-  // Users
+  // Users - from javascript_log_in_with_replit integration
+  // (IMPORTANT) these user operations are mandatory for Replit Auth.
   async getUser(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user || undefined;
   }
 
+  async upsertUser(userData: UpsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
+      .returning();
+    return user;
+  }
+
+  // Additional user operations
   async getUserByUsername(username: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.username, username));
     return user || undefined;

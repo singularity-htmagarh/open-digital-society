@@ -1,16 +1,31 @@
 import { sql, relations } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, boolean, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, boolean, jsonb, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// Users table - from javascript_database integration
+// Session storage table - from javascript_log_in_with_replit integration
+// (IMPORTANT) This table is mandatory for Replit Auth, don't drop it.
+export const sessions = pgTable(
+  "sessions",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: jsonb("sess").notNull(),
+    expire: timestamp("expire").notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)],
+);
+
+// User storage table - from javascript_log_in_with_replit integration  
+// (IMPORTANT) This table is mandatory for Replit Auth, don't drop it.
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  email: text("email").notNull().unique(),
-  name: text("name").notNull(),
+  email: varchar("email").unique(),
+  firstName: varchar("first_name"),
+  lastName: varchar("last_name"),
+  profileImageUrl: varchar("profile_image_url"),
+  // Additional fields for publishing platform
+  username: text("username").unique(),
   bio: text("bio"),
-  avatar: text("avatar"),
   isWriter: boolean("is_writer").default(false),
   totalClaps: integer("total_claps").default(0),
   followersCount: integer("followers_count").default(0),
@@ -200,13 +215,22 @@ export const followsRelations = relations(follows, ({ one }) => ({
   }),
 }));
 
-// Insert schemas
+// Insert schemas - from javascript_log_in_with_replit integration
+export const upsertUserSchema = createInsertSchema(users).pick({
+  id: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+  profileImageUrl: true,
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   email: true,
-  name: true,
+  firstName: true,
+  lastName: true,
   bio: true,
-  avatar: true,
+  profileImageUrl: true,
 });
 
 export const insertArticleSchema = createInsertSchema(articles).pick({
@@ -238,7 +262,8 @@ export const insertDonationSchema = createInsertSchema(donations).pick({
   message: true,
 });
 
-// Types
+// Types - from javascript_log_in_with_replit integration
+export type UpsertUser = z.infer<typeof upsertUserSchema>;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertArticle = z.infer<typeof insertArticleSchema>;
