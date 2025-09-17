@@ -2,24 +2,11 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+// import { setupAuth, isAuthenticated } from "./replitAuth";
 import { insertArticleSchema, insertCommentSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Auth middleware - from javascript_log_in_with_replit integration
-  await setupAuth(app);
-
-  // Auth routes - from javascript_log_in_with_replit integration
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      res.json(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
-    }
-  });
+  // Replit authentication removed
 
   // Article routes
   app.get('/api/articles', async (req, res) => {
@@ -49,21 +36,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post('/api/articles', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const validatedData = insertArticleSchema.parse(req.body);
-      
-      const article = await storage.createArticle({
-        ...validatedData,
-        authorId: userId,
-      });
-      
-      res.status(201).json(article);
-    } catch (error) {
-      console.error("Error creating article:", error);
-      res.status(500).json({ message: "Failed to create article" });
-    }
+  app.post('/api/articles', async (req: any, res) => {
+    // Authentication removed
+    res.status(501).json({ message: "Authentication required. Replit auth removed." });
   });
 
   // Search routes
@@ -83,43 +58,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Engagement routes
-  app.post('/api/articles/:id/clap', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const articleId = req.params.id;
-      
-      const hasClapped = await storage.hasUserClappedArticle(userId, articleId);
-      if (hasClapped) {
-        return res.status(400).json({ message: "Already clapped" });
-      }
-      
-      await storage.clapArticle(userId, articleId);
-      res.json({ success: true });
-    } catch (error) {
-      console.error("Error clapping article:", error);
-      res.status(500).json({ message: "Failed to clap article" });
-    }
+  app.post('/api/articles/:id/clap', async (req: any, res) => {
+    // Authentication removed
+    res.status(501).json({ message: "Authentication required. Replit auth removed." });
   });
 
-  app.post('/api/articles/:id/comments', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const articleId = req.params.id;
-      const validatedData = insertCommentSchema.parse({
-        ...req.body,
-        articleId,
-      });
-      
-      const comment = await storage.createComment({
-        ...validatedData,
-        authorId: userId,
-      });
-      
-      res.status(201).json(comment);
-    } catch (error) {
-      console.error("Error creating comment:", error);
-      res.status(500).json({ message: "Failed to create comment" });
-    }
+  app.post('/api/articles/:id/comments', async (req: any, res) => {
+    // Authentication removed
+    res.status(501).json({ message: "Authentication required. Replit auth removed." });
   });
 
   app.get('/api/articles/:id/comments', async (req, res) => {
