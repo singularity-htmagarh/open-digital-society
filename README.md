@@ -1,6 +1,8 @@
 # Open Digital Society
 
-Open Digital Society is a digital marketplace platform where project owners can list and sell their digital products, and buyers can browse, purchase, and download these products securely.
+Open Digital Society is a non-profit digital marketplace platform dedicated to facilitating secure, transparent, and accessible global transactions of digital products between buyers and sellers. Our mission is to empower creators, entrepreneurs, and innovators worldwide by providing a trusted space to list, sell, and acquire digital goods—regardless of geography or background.
+
+We make online business acquisitions fast, safe, and easy for everyone. Sellers can maximize their reach and impact, while buyers discover vetted digital products from around the world. By removing barriers and prioritizing community-driven values, Open Digital Society helps foster economic opportunity and digital inclusion on a global scale.
 
 ## Frontend: React Application
 
