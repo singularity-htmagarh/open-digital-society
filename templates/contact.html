@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - ReachInbox.ai Inspired</title>
+    <title>Acquire.com Inspired - Contact</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/features">Features</a> |
-        <a href="/pricing">Pricing</a> |
-        <a href="/contact">Contact</a> |
-        {% if current_user.is_authenticated %}
-            <a href="/dashboard">Dashboard</a> |
-            <a href="/logout">Logout</a>
-        {% else %}
-            <a href="/login">Login</a>
-        {% endif %}
-    </nav>
+    <div class="navbar-floating">
+        <div class="navbar-logo">M</div>
+        <div class="navbar-links">
+            <a href="/">Home</a>
+            <a href="/features">Features</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/faqs">FAQs</a>
+        </div>
+        <a href="/signup" class="navbar-cta">Start For Free</a>
+    </div>
     <main>
-        <h1>Contact Us</h1>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea><br>
-            <button type="submit">Send</button>
-        </form>
+        <section style="margin-top:120px;text-align:center;">
+            <h1 style="font-size:2.5em;font-weight:800;color:#fff;">Contact Us</h1>
+            <p style="font-size:1.2em;color:#e5e7eb;margin:1em 0 2em 0;">Questions? Reach out to our team and we'll get back to you soon.</p>
+            <div style="background:#1e293b;border-radius:24px;box-shadow:0 4px 32px rgba(37,99,235,0.18);padding:2em;max-width:400px;margin:2em auto;">
+                <form>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required><br>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea><br>
+                    <button type="submit">Send</button>
+                </form>
+                <p style="color:#e5e7eb;margin-top:2em;">Or email us at <a href="mailto:support@acquire.com" style="color:#2563eb;">support@acquire.com</a></p>
+            </div>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2025 ReachInbox.ai Inspired Demo</p>
+        <p>&copy; 2025 Acquire.com Inspired Demo</p>
     </footer>
 </body>
 </html>

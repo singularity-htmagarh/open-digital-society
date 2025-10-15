@@ -3,38 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReachInbox.ai Inspired - Home</title>
+    <title>Acquire.com Inspired - Home</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/features">Features</a> |
-        <a href="/pricing">Pricing</a> |
-        <a href="/contact">Contact</a> |
-        {% if current_user.is_authenticated %}
-            <a href="/dashboard">Dashboard</a> |
-            <a href="/logout">Logout</a>
-        {% else %}
-            <a href="/login">Login</a>
-        {% endif %}
-    </nav>
-    <header>
-        <h1>Welcome to Your Inbox Automation</h1>
-        <p>Automate, personalize, and scale your outreach like never before.</p>
-        <a href="/features" class="cta">See Features</a>
-    </header>
-    <section>
-        <h2>Featured Benefits</h2>
-        <ul>
-            <li>Automated email sequences</li>
-            <li>Personalized outreach</li>
-            <li>Analytics dashboard</li>
-            <li>Integrations with popular tools</li>
-        </ul>
-    </section>
+    <div class="navbar-floating">
+        <div class="navbar-logo">M</div>
+        <div class="navbar-links">
+            <a href="/" class="active">Home</a>
+            <a href="/features">Features</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/faqs">FAQs</a>
+        </div>
+        <a href="/signup" class="navbar-cta">Start For Free</a>
+    </div>
+    <main>
+        <section style="margin-top:120px;text-align:center;">
+            <h1 style="font-size:2.5em;font-weight:800;color:#fff;">We make online business acquisitions fast, safe, and easy</h1>
+            <p style="font-size:1.2em;color:#e5e7eb;margin:1em 0 2em 0;">Join 500k+ founders and buyers already doing business on Acquire.com</p>
+            <a href="/signup" class="navbar-cta" style="font-size:1.2em;">Join now</a>
+        </section>
+        <section style="display:flex;flex-wrap:wrap;justify-content:center;gap:3em;margin-top:3em;">
+            <div style="background:#1e293b;border-radius:24px;box-shadow:0 4px 32px rgba(37,99,235,0.18);padding:2em;max-width:400px;min-width:280px;">
+                <h2 style="color:#2563eb;font-size:1.5em;font-weight:700;">Sellers</h2>
+                <ul style="color:#e5e7eb;text-align:left;font-size:1.1em;">
+                    <li>Maximize your exit with expert help from our team</li>
+                    <li>Get in front of 500k+ buyers</li>
+                    <li>Field offers from qualified buyers with verified funds</li>
+                    <li>Close safely for free with Escrow.com</li>
+                </ul>
+                <a href="/signup" class="navbar-cta" style="margin-top:1em;">Sell your online business</a>
+            </div>
+            <div style="background:#1e293b;border-radius:24px;box-shadow:0 4px 32px rgba(37,99,235,0.18);padding:2em;max-width:400px;min-width:280px;">
+                <h2 style="color:#2563eb;font-size:1.5em;font-weight:700;">Buyers</h2>
+                <ul style="color:#e5e7eb;text-align:left;font-size:1.1em;">
+                    <li>Find your ideal startup and make an offer in minutes</li>
+                    <li>Browse 1,000s of vetted online businesses for sale</li>
+                    <li>Project returns with live metrics</li>
+                    <li>Get help to acquire with acquisition financing</li>
+                </ul>
+                <a href="/signup" class="navbar-cta" style="margin-top:1em;">Discover your dream startup</a>
+            </div>
+        </section>
+        <section style="margin-top:4em;text-align:center;">
+            <h2 style="color:#fff;font-size:2em;font-weight:700;">What do founders and buyers say about Acquire.com?</h2>
+            <blockquote style="background:#111827;color:#e5e7eb;border-radius:16px;padding:2em;margin:2em auto;max-width:600px;box-shadow:0 2px 16px rgba(37,99,235,0.10);">
+                “Excellent first acquisition experience. I loved how simple it was to create a listing for my company. Each step was clear and support was always available.”<br><br>
+                <span style="color:#2563eb;font-weight:600;">Celso W.</span>
+            </blockquote>
+        </section>
+    </main>
     <footer>
-        <p>&copy; 2025 ReachInbox.ai Inspired Demo</p>
+        <p>&copy; 2025 Acquire.com Inspired Demo</p>
     </footer>
 </body>
 </html>
