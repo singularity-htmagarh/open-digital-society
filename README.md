@@ -1,15 +1,44 @@
 # Open Digital Society
 
-Open Digital Society is a non-profit, Medium-style publishing platform for writers and readers. It provides an open-access place to publish, discover, and engage with long-form content. The repository contains a Vite + React frontend (in `client/`) and an Express + TypeScript backend (in `server/`) using Postgres via Drizzle ORM.
+Open Digital Society is a digital marketplace platform where project owners can list and sell their digital products, and buyers can browse, purchase, and download these products securely.
+
+## Frontend: React Application
+
+The frontend of this project is built entirely with **React** using Vite for fast development and modern tooling. All user-facing pages, components, and UI logic are implemented in React (TypeScript) and located in the `client/` directory.
+
+- **React** powers the UI and interactive features
+- **Vite** provides fast dev server and build tools
+- **TypeScript** ensures type safety and maintainability
+
+To start developing the React frontend:
+
+```powershell
+cd client
+npm install
+npm run dev
+```
+
+This will launch the React app locally. You can edit files in `client/src/` and see changes instantly.
+
+## Backend: Express + TypeScript
+
+The backend is an Express server written in TypeScript, located in the `server/` directory. It serves the API and, in development, also proxies the React frontend.
+
+---
+
+# Project Details
+
+Open Digital Society is a marketplace for digital products. Project owners can create accounts, list their digital products (such as e-books, software, designs, media, etc.), set prices, and manage their sales. Buyers can browse the marketplace, search for products, view details, purchase, and download digital goods securely.
 
 ## Key features
-- Public article listing and detail pages
-- Search and tagging for content discovery
-- Author profiles and basic user data model
-- Comments with threading and claps for engagement
-- Bookmarks and basic follow/clap operations in storage
-- Donation call-to-action component and donation flows placeholder
-- Theme toggle, responsive UI, and editor/write actions (UI only)
+- Seller accounts for listing and managing digital products
+- Buyer accounts for purchasing and downloading products
+- Product catalog with search, categories, and tags
+- Secure payment integration for digital transactions
+- Product detail pages with descriptions, previews, and reviews
+- Order history and digital delivery for buyers
+- Dashboard for sellers to track sales and manage listings
+- Responsive UI and theme toggle
 
 ## Project layout
 - `client/` - Vite + React app
@@ -31,9 +60,6 @@ Required/used variables:
 - `PORT` - (optional) Port the server listens on (default 5000).
 - `NODE_ENV` - `development` or `production` (scripts set this with `cross-env`).
 
-Notes:
-- Replit-specific variables and code were removed from the project (`REPLIT_DOMAINS`, `REPL_ID`, Replit auth). If you previously relied on Replit OIDC, the integration lives in `server/replitAuth.ts` (removed) and can be restored manually.
-
 ## Getting started (Windows)
 1. Install dependencies
 ```powershell
@@ -47,9 +73,6 @@ DATABASE_URL=dummy_connection_string
 ```powershell
 npm run dev
 ```
-Notes for Windows
-- The project uses `cross-env` for cross-platform environment variables in `package.json` scripts. The `dev` script runs the TypeScript server with `tsx`.
-- If you want to run frontend-only during development you can cd into `client/` and use `vite` directly, but the repo is configured to serve the client from the backend in development.
 
 ## Running in production (build)
 1. Build the frontend and compile the server bundle
@@ -62,30 +85,18 @@ npm start
 ```
 
 ## API endpoints (subset)
-- `GET /api/articles` - list published articles (query: `limit`, `offset`)
-- `GET /api/articles/:id` - fetch a single article
-- `GET /api/articles/:id/comments` - comments for an article
-- `GET /api/search?q=...` - search published articles
-
-Note: endpoints for creating articles/comments/claps were previously protected by Replit OIDC auth and now return 501 placeholders. See `server/routes.ts`.
+- `GET /api/products` - list digital products (query: `limit`, `offset`, `category`, `search`)
+- `GET /api/products/:id` - fetch a single product
+- `POST /api/orders` - create a new order (purchase)
+- `GET /api/orders/:id` - get order details and download link
+- `POST /api/products` - seller creates a new product listing
 
 ## Development notes
 - Database schema is in `shared/schema.ts`. Use `drizzle-kit` to manage migrations.
 - The server uses `dotenv` to load `.env`. If you prefer another secrets management system, update `server/db.ts` and any files that call `process.env`.
-- Replit integration: Replit-specific Vite plugins and auth checks are gated on `process.env.REPL_ID` in `vite.config.ts`. Those checks were left but will no-op without `REPL_ID`.
-
-## How to re-enable OAuth/Replit auth
-If you want to restore Replit OIDC auth (or add another OIDC provider):
-1. Restore or review `server/replitAuth.ts` (the file was removed to simplify the app). You can reintroduce it and update `routes.ts` to call `setupAuth(app)` and use the `isAuthenticated` middleware on protected routes.
-2. Set the required environment variables (provider issuer, client id, domains, session secret).
-
-## Troubleshooting
-- "DATABASE_URL must be set": create a `.env` file with `DATABASE_URL`.
-- Socket/listen errors on Windows: ensure the `PORT` is reachable; the server binds to `0.0.0.0` by default. Use `PORT=5000` or another free port.
-- If vite plugins reference `REPL_ID` (cartographer), they will not load without that env var — this is expected.
 
 ## Contributing
 Contributions are welcome. Open a PR against `main`. Add tests for new server logic and run TypeScript checks with `npm run check`.
 
 ---
-README generated from repository files and client HTML/UI. If you'd like a shorter or longer README, or want badges/CI instructions added, tell me which sections to expand and I'll update it.
+README generated for a digital marketplace platform. If you'd like more details, want badges/CI instructions, or need specific sections expanded, let me know!
