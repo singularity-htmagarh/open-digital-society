@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Open Digital Society</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="/static/navbar.js"></script>
+</head>
+<body>
+    <script>injectNavbar('signup');</script>
+    <main>
+        <section style="margin-top:120px;text-align:center;">
+            <h1 style="font-size:2.2em;font-weight:800;color:#fff;">Sign Up</h1>
+            <p style="font-size:1.1em;color:#e5e7eb;margin:1em 0 2em 0;">Join Open Digital Society as a buyer or seller and participate in the global digital marketplace.</p>
+            <div style="background:#1e293b;border-radius:24px;box-shadow:0 4px 32px rgba(37,99,235,0.18);padding:2em;max-width:420px;margin:2em auto;">
+                <form id="signupForm">
+                    <label for="role">I am a:</label>
+                    <select id="role" name="role" required onchange="showRoleFields()">
+                        <option value="">Select...</option>
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Seller</option>
+                    </select>
+                    <div id="buyerFields" style="display:none;">
+                        <label for="buyerInterest">What type of digital asset are you looking to purchase?</label>
+                        <input type="text" id="buyerInterest" name="buyerInterest" placeholder="e.g. SaaS, eBook, Design, App">
+                        <label for="buyerBudget">What is your budget?</label>
+                        <input type="text" id="buyerBudget" name="buyerBudget" placeholder="e.g. $5000">
+                    </div>
+                    <div id="sellerFields" style="display:none;">
+                        <label for="sellerProduct">What digital asset are you selling?</label>
+                        <input type="text" id="sellerProduct" name="sellerProduct" placeholder="e.g. SaaS, eBook, Design, App">
+                        <label for="sellerDescription">Describe your product:</label>
+                        <textarea id="sellerDescription" name="sellerDescription" placeholder="Brief description"></textarea>
+                        <label for="sellerPrice">What is your asking price?</label>
+                        <input type="text" id="sellerPrice" name="sellerPrice" placeholder="e.g. $5000">
+                    </div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Open Digital Society, All Rights Reserved</p>
+    </footer>
+    <script>
+    function showRoleFields() {
+        var role = document.getElementById('role').value;
+        document.getElementById('buyerFields').style.display = role === 'buyer' ? 'block' : 'none';
+        document.getElementById('sellerFields').style.display = role === 'seller' ? 'block' : 'none';
+    }
+    </script>
+</body>
+</html>

@@ -37,9 +37,9 @@ def home():
 def features():
     return render_template('features.html')
 
-@app.route('/pricing')
+@app.route('/faqs')
 def pricing():
-    return render_template('pricing.html')
+    return render_template('faqs.html')
 
 @app.route('/contact')
 def contact():
@@ -68,6 +68,28 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        role = request.form.get('role')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        if role == 'buyer':
+            buyer_interest = request.form.get('buyerInterest')
+            buyer_budget = request.form.get('buyerBudget')
+            # Here you would save buyer info to the database
+            flash(f'Thank you {name}, you have signed up as a buyer interested in {buyer_interest} with a budget of {buyer_budget}.')
+        elif role == 'seller':
+            seller_product = request.form.get('sellerProduct')
+            seller_description = request.form.get('sellerDescription')
+            seller_price = request.form.get('sellerPrice')
+            # Here you would save seller info to the database
+            flash(f'Thank you {name}, you have signed up as a seller listing {seller_product} for {seller_price}.')
+        else:
+            flash('Please select a valid role.')
+        return redirect(url_for('signup'))
+    return render_template('signup.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

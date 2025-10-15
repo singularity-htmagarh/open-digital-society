@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - ReachInbox.ai Inspired</title>
+    <title>Open Digital Society</title>
     <link rel="stylesheet" href="/static/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="/static/navbar.js"></script>
 </head>
 <body>
-    <div class="navbar-floating">
-        <img src="/static/ods-logo.png" alt="Open Digital Society Logo" class="navbar-logo-img" style="height:48px;width:auto;border-radius:16px;background:#fff;padding:4px;margin-right:2em;" />
-        <div class="navbar-links">
-            <a href="/">Home</a>
-            <a href="/features">Features</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/faqs">FAQs</a>
-        </div>
-        <a href="/signup" class="navbar-cta">Start For Free</a>
+    <div class="aurora-bg">
+        <div class="aurora-1"></div>
+        <div class="aurora-2"></div>
+        <div class="aurora-3"></div>
     </div>
+    <script>injectNavbar();</script>
     <main>
         <div class="dashboard-card">
             <h1>Welcome, {{ user.id }}</h1>
