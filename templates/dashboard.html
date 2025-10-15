@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ReachInbox.ai Inspired</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar-floating">
+        <div class="navbar-logo">M</div>
+        <div class="navbar-links">
+            <a href="/" >Home</a>
+            <a href="/features">Features</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/faqs">FAQs</a>
+        </div>
+        <a href="/signup" class="navbar-cta">Start For Free</a>
+    </div>
+    <main>
+        <div class="dashboard-card">
+            <h1>Welcome, {{ user.id }}</h1>
+            <p>This is your dashboard. Here you can manage your campaigns, view analytics, and update your profile.</p>
+            <div style="display: flex; gap: 2em; justify-content: center; flex-wrap: wrap; margin-top: 2em;">
+                <div style="background: linear-gradient(90deg, #2563eb 60%, #1e293b 100%); color: #fff; border-radius: 16px; padding: 1.5em 2em; min-width: 180px; box-shadow: 0 2px 16px rgba(37,99,235,0.10);">
+                    <h2 style="margin:0;font-size:1.3em;font-weight:600;">Campaigns</h2>
+                    <p style="margin:0.5em 0 0 0;">Create, manage, and track your outreach campaigns.</p>
+                </div>
+                <div style="background: linear-gradient(90deg, #2563eb 60%, #1e293b 100%); color: #fff; border-radius: 16px; padding: 1.5em 2em; min-width: 180px; box-shadow: 0 2px 16px rgba(37,99,235,0.10);">
+                    <h2 style="margin:0;font-size:1.3em;font-weight:600;">Analytics</h2>
+                    <p style="margin:0.5em 0 0 0;">View open rates, replies, and deliverability insights.</p>
+                </div>
+                <div style="background: linear-gradient(90deg, #2563eb 60%, #1e293b 100%); color: #fff; border-radius: 16px; padding: 1.5em 2em; min-width: 180px; box-shadow: 0 2px 16px rgba(37,99,235,0.10);">
+                    <h2 style="margin:0;font-size:1.3em;font-weight:600;">Inbox</h2>
+                    <p style="margin:0.5em 0 0 0;">Manage replies and conversations in one place.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Open Digital Society Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>
